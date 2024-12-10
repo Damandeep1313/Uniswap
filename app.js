@@ -60,7 +60,8 @@ async function getBestQuote(provider, tokenInAddress, tokenOutAddress, amountInW
         0
       );
       return { fee, amountOut };
-    } catch {
+    } catch (error) {
+      console.error(`Fee tier ${fee} failed: ${error.message}`);
       continue; // Try the next fee tier
     }
   }
@@ -74,15 +75,19 @@ async function getBestQuote(provider, tokenInAddress, tokenOutAddress, amountInW
  * Requires a private key in the Authorization header.
  */
 app.post('/swap', async (req, res) => {
-  const { Authorization } = req.headers;
+  const { authorization } = req.headers;
+  console.log("Authorization Header Received:", authorization);
+
   const { amountIn, tokenIn, tokenOut } = req.body;
 
-  if (!Authorization) return res.status(401).json({ error: "Private key required in Authorization header" });
-  if (!amountIn || !tokenIn || !tokenOut) return res.status(400).json({ error: "Missing required parameters in request body" });
+  if (!authorization) return res.status(401).json({ error: "Private key required in Authorization header" });
+  if (!amountIn || !tokenIn || !tokenOut) {
+    return res.status(400).json({ error: "Missing required parameters in request body" });
+  }
 
   try {
     const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
-    const wallet = new ethers.Wallet(Authorization, provider);
+    const wallet = new ethers.Wallet(authorization, provider);
     const tokenInAddress = findTokenAddress(tokenIn);
     const tokenOutAddress = findTokenAddress(tokenOut);
     const amountInWei = ethers.utils.parseEther(amountIn);
