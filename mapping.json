@@ -3643,6 +3643,10 @@
     "name": "Centurion Invest",
     "symbol": "CIX"
   },
+  "0x49218282042072e054afdc90e552e832735f8316": {
+    "name": "Cerebro",
+    "symbol": "CRX"
+  },
   "0xab814ce69e15f6b9660a3b184c0b0c97b9394a6b": {
     "name": "Cerebrum DAO",
     "symbol": "NEURON"
@@ -7366,6 +7370,10 @@
   "0xdb0238975ce84f89212ffa56c64c0f2b47f8f153": {
     "name": "Flork",
     "symbol": "$FLORK"
+  },
+  "0x6ab4ce36260f201e4e2391eca2fd7538f71e4131": {
+    "name": "Flourishing AI",
+    "symbol": "AI"
   },
   "0x725024200cd4e1f259fcf2b7153d37fb477e139c": {
     "name": "Flovi Inu",
@@ -13299,6 +13307,10 @@
     "name": "OctopusWallet",
     "symbol": "OCW"
   },
+  "0x81de7654a08b0a37d136eb6e31a54543cdabeb15": {
+    "name": "OddsNotify",
+    "symbol": "ODDS"
+  },
   "0xcd2828fc4d8e8a0ede91bb38cf64b1a81de65bf6": {
     "name": "Oddz",
     "symbol": "ODDZ"
@@ -18198,6 +18210,10 @@
   "0x009668a9691e456972c8ec4cc84e99486308b84d": {
     "name": "Terareum [OLD]",
     "symbol": "TERA"
+  },
+  "0xa6c1a66a3ac742f1885207253fc776d94c8beed5": {
+    "name": "Tereon",
+    "symbol": "TRN"
   },
   "0xc3d21f79c3120a4ffda7a535f8005a7c297799bf": {
     "name": "Term Finance",
