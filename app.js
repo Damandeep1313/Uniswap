@@ -15,7 +15,7 @@ const quoterAbi = JSON.parse(fs.readFileSync(path.join(__dirname, 'abi', 'IUnisw
 const RPC_URL = process.env.RPC_URL;
 const UNISWAP_V3_ROUTER_ADDRESS = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
 const QUOTER_ADDRESS = "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
-const feeTiers = [500, 3000, 10000]; // Fee tiers in ascending order
+const feeTiers = [500, 3000, 10000, 15000]; // Fee tiers in ascending order
 
 // Increase gas limit for more complex trades
 const MAX_GAS_LIMIT = ethers.BigNumber.from(500000);
