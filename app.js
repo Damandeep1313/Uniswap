@@ -23,7 +23,7 @@ const MAX_GAS_LIMIT = ethers.BigNumber.from(300000); // Upper limit for gas (300
 const WETH_ADDRESS = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 
 // Token mapping file
-const tokenMap = JSON.parse(fs.readFileSync(path.join(__dirname, 'extra_info_tokens_coingecko.json'), 'utf8'));
+const tokenMap = JSON.parse(fs.readFileSync(path.join(__dirname, 'mapping.json'), 'utf8'));
 
 /**
  * Finds the address of a token given its symbol or name.
