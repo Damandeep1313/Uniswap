@@ -21220,6 +21220,274 @@
     "name": "Zygo The Frog",
     "symbol": "ZYGO"
   },
+  "NATIVE": {
+    "name": "Ethereum",
+    "symbol": "ETH"
+  },
+  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": {
+    "name": "USD Coin",
+    "symbol": "USDC"
+  },
+  "0xdAC17F958D2ee523a2206206994597C13D831ec7": {
+    "name": "Tether USD",
+    "symbol": "USDT"
+  },
+  "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599": {
+    "name": "Wrapped BTC",
+    "symbol": "WBTC"
+  },
+  "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf": {
+    "name": "Coinbase Wrapped BTC",
+    "symbol": "cbBTC"
+  },
+  "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0": {
+    "name": "Wrapped liquid staked Ether 2.0",
+    "symbol": "wstETH"
+  },
+  "0x514910771AF9Ca656af840dff83E8264EcF986CA": {
+    "name": "ChainLink Token",
+    "symbol": "LINK"
+  },
+  "0xc575BD129848Ce06A460A19466c30E1D0328F52C": {
+    "name": "Reploy",
+    "symbol": "RAI"
+  },
+  "0x50327c6c5a14DCaDE707ABad2E27eB517df87AB5": {
+    "name": "TRON",
+    "symbol": "TRX"
+  },
+  "0xC4441c2BE5d8fA8126822B9929CA0b81Ea0DE38E": {
+    "name": "USUAL",
+    "symbol": "USUAL"
+  },
+  "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984": {
+    "name": "Uniswap",
+    "symbol": "UNI"
+  },
+  "0x58D97B57BB95320F9a05dC918Aef65434969c2B2": {
+    "name": "Morpho Token",
+    "symbol": "MORPHO"
+  },
+  "0xfAbA6f8e4a5E8Ab82F62fe7C39859FA577269BE3": {
+    "name": "Ondo",
+    "symbol": "ONDO"
+  },
+  "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee": {
+    "name": "Wrapped eETH",
+    "symbol": "weETH"
+  },
+  "0xDa2E903b0B67F30BF26bD3464f9EE1a383BbbE5F": {
+    "name": "PEPE MAGA",
+    "symbol": "MAGA"
+  },
+  "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497": {
+    "name": "Staked USDe",
+    "symbol": "sUSDe"
+  },
+  "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3": {
+    "name": "USDe",
+    "symbol": "USDe"
+  },
+  "0xE0f63A424a4439cBE457D80E4f4b51aD25b2c56C": {
+    "name": "SPX6900",
+    "symbol": "SPX"
+  },
+  "0x6B175474E89094C44Da98b954EedeAC495271d0F": {
+    "name": "Dai Stablecoin",
+    "symbol": "DAI"
+  },
+  "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9": {
+    "name": "Aave Token",
+    "symbol": "AAVE"
+  },
+  "0xD31a59c85aE9D8edEFeC411D448f90841571b89c": {
+    "name": "Wrapped SOL (Wormhole)",
+    "symbol": "SOL"
+  },
+  "0x57e114B691Db790C35207b2e685D4A43181e6061": {
+    "name": "ENA",
+    "symbol": "ENA"
+  },
+  "0x2bB84fd8F7eD0FfAe3da36AD60d4D7840bdeEADa": {
+    "name": "SORA GROK",
+    "symbol": "GROK"
+  },
+  "0x64c5cbA9A1BfBD2A5faf601D91Beff2dCac2c974": {
+    "name": "Mystery",
+    "symbol": "MYSTERY"
+  },
+  "0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a": {
+    "name": "Mog Coin",
+    "symbol": "Mog"
+  },
+  "0x1121AcC14c63f3C872BFcA497d10926A6098AAc5": {
+    "name": "Department Of Government Efficiency",
+    "symbol": "DOGE"
+  },
+  "0x62D0A8458eD7719FDAF978fe5929C6D342B0bFcE": {
+    "name": "Beam",
+    "symbol": "BEAM"
+  },
+  "0x6E79B51959CF968d87826592f46f819F92466615": {
+    "name": "Hoppy",
+    "symbol": "HOPPY"
+  },
+  "0x5ff0d2De4Cd862149c6672C99B7Edf3B092667A3": {
+    "name": "SPX69000",
+    "symbol": "SPX"
+  },
+  "0x6982508145454Ce325dDbE47a25d4ec3d2311933": {
+    "name": "Pepe",
+    "symbol": "PEPE"
+  },
+  "0x04F121600c8C47A754636fc9d75661a9525e05D5": {
+    "name": "STARS",
+    "symbol": "STARS"
+  },
+  "0xadd39272E83895E7d3f244f696B7a25635F34234": {
+    "name": "Pepe Unchained",
+    "symbol": "PEPU"
+  },
+  "0x555907a0b5c32DF0fEb35401187aED60a9191D74": {
+    "name": "trumpwifhat",
+    "symbol": "TRUMP"
+  },
+  "0x44ff8620b8cA30902395A7bD3F2407e1A091BF73": {
+    "name": "Virtual Protocol",
+    "symbol": "VIRTUAL"
+  },
+  "0x761D38e5ddf6ccf6Cf7c55759d5210750B5D60F3": {
+    "name": "Dogelon",
+    "symbol": "ELON"
+  },
+  "0x8236a87084f8B84306f72007F36F2618A5634494": {
+    "name": "Lombard Staked Bitcoin",
+    "symbol": "LBTC"
+  },
+  "0xBe9895146f7AF43049ca1c1AE358B0541Ea49704": {
+    "name": "Coinbase Wrapped Staked ETH",
+    "symbol": "cbETH"
+  },
+  "0x28561B8A2360F463011c16b6Cc0B0cbEF8dbBcad": {
+    "name": "MOO DENG",
+    "symbol": "MOODENG"
+  },
+  "0x812Ba41e071C7b7fA4EBcFB62dF5F45f6fA853Ee": {
+    "name": "Neiro",
+    "symbol": "Neiro"
+  },
+  "0x77E06c9eCCf2E797fd462A92B6D7642EF85b0A44": {
+    "name": "Wrapped TAO",
+    "symbol": "wTAO"
+  },
+  "0x18084fbA666a33d37592fA2633fD49a74DD93a88": {
+    "name": "tBTC v2",
+    "symbol": "tBTC"
+  },
+  "0xec53bF9167f50cDEB3Ae105f56099aaaB9061F83": {
+    "name": "Eigen",
+    "symbol": "EIGEN"
+  },
+  "0xae78736Cd615f374D3085123A210448E74Fc6393": {
+    "name": "Rocket Pool ETH",
+    "symbol": "rETH"
+  },
+  "0x44971ABF0251958492FeE97dA3e5C5adA88B9185": {
+    "name": "basedAI",
+    "symbol": "basedAI"
+  },
+  "0xE9732d4b1E7d3789004fF029f032bA3034db059c": {
+    "name": "Patriot",
+    "symbol": "PATRIOT"
+  },
+  "0x594DaaD7D77592a2b97b725A7AD59D7E188b5bFa": {
+    "name": "Apu Apustaja",
+    "symbol": "APU"
+  },
+  "0xcDbddbdEFB0eE3eF03a89AFcd714aa4ef310D567": {
+    "name": "Vertical AI",
+    "symbol": "VERTAI"
+  },
+  "0xB528edBef013aff855ac3c50b381f253aF13b997": {
+    "name": "Aevo",
+    "symbol": "AEVO"
+  },
+  "0x2CC7A972ebC1865B346085655f929AbFa74CD4dC": {
+    "name": "Shifu",
+    "symbol": "SHIFU"
+  },
+  "0x0000000000c5dc95539589fbD24BE07c6C14eCa4": {
+    "name": "Milady Cult Coin",
+    "symbol": "CULT"
+  },
+  "0x39D5313C3750140E5042887413bA8AA6145a9bd2": {
+    "name": "Empyreal",
+    "symbol": "EMP"
+  },
+  "0x391cF4b21F557c935C7f670218Ef42C21bd8d686": {
+    "name": "Morphware",
+    "symbol": "XMW"
+  },
+  "0xe53EC727dbDEB9E2d5456c3be40cFF031AB40A55": {
+    "name": "SuperFarm",
+    "symbol": "SUPER"
+  },
+  "0xbe0Ed4138121EcFC5c0E56B40517da27E6c5226B": {
+    "name": "Aethir Token",
+    "symbol": "ATH"
+  },
+  "0xD533a949740bb3306d119CC777fa900bA034cd52": {
+    "name": "Curve DAO Token",
+    "symbol": "CRV"
+  },
+  "0x14feE680690900BA0ccCfC76AD70Fd1b95D10e16": {
+    "name": "PAAL AI",
+    "symbol": "$PAAL"
+  },
+  "0x67466BE17df832165F8C80a5A120CCc652bD7E69": {
+    "name": "Landwolf",
+    "symbol": "WOLF"
+  },
+  "0x4E15361FD6b4BB609Fa63C81A2be19d873717870": {
+    "name": "Fantom Token",
+    "symbol": "FTM"
+  },
+  "0xF944e35f95E819E752f3cCB5Faf40957d311e8c5": {
+    "name": "Moca",
+    "symbol": "MOCA"
+  },
+  "0x8143182a775C54578c8B7b3Ef77982498866945D": {
+    "name": "Wrapped QUIL",
+    "symbol": "wQUIL"
+  },
+  "0x66761Fa41377003622aEE3c7675Fc7b5c1C2FaC5": {
+    "name": "Clearpool",
+    "symbol": "CPOOL"
+  },
+  "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72": {
+    "name": "Ethereum Name Service",
+    "symbol": "ENS"
+  },
+  "0x6De037ef9aD2725EB40118Bb1702EBb27e4Aeb24": {
+    "name": "Render Token",
+    "symbol": "RNDR"
+  },
+  "0xa84f95eb3DaBdc1bbD613709ef5F2fD42CE5bE8d": {
+    "name": "EAI",
+    "symbol": "EAI"
+  },
+  "0x66a1E37c9b0eAddca17d3662D6c05F4DECf3e110": {
+    "name": "Resolv USD",
+    "symbol": "USR"
+  },
+  "0xb23d80f5FefcDDaa212212F028021B41DEd428CF": {
+    "name": "Prime",
+    "symbol": "PRIME"
+  },
+  "0x3c3a81e81dc49A522A592e7622A7E711c06bf354": {
+    "name": "Mantle",
+    "symbol": "MNT"
+  },
   "0x58cb30368ceb2d194740b144eab4c2da8a917dcb": {
     "name": "ZynCoin",
     "symbol": "ZYN"
