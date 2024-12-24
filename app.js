@@ -16,35 +16,29 @@ const RPC_URL = process.env.RPC_URL;
 const UNISWAP_V3_ROUTER_ADDRESS = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
 const QUOTER_ADDRESS = "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
 const feeTiers = [500, 3000, 10000]; // Fee tiers in ascending order
-const MAX_GAS_LIMIT = ethers.BigNumber.from(300000); // Upper limit for gas (300,000 units)
+
+// Increase gas limit for more complex trades
+const MAX_GAS_LIMIT = ethers.BigNumber.from(500000);
 
 // WETH mainnet address
 const WETH_ADDRESS = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 
-// Token mapping file
-const tokenMap = JSON.parse(fs.readFileSync(path.join(__dirname, 'mapping.json'), 'utf8'));
-
 /**
- * Finds the address of a token given its symbol or name.
+ * Returns the token address.
  * Special case: if user says "eth", return WETH_ADDRESS.
- * @param {string} tokenStr Token name or symbol
+ * Otherwise, assume the token string is already the correct address.
+ * @param {string} tokenStr Token or address
  * @returns {string} Token address
  */
 function findTokenAddress(tokenStr) {
-  const t = tokenStr.toLowerCase();
-  if (t === 'eth') {
+  const lowerStr = tokenStr.toLowerCase();
+  if (lowerStr === 'eth') {
     // Use WETH address for ETH swaps
     return WETH_ADDRESS;
+  } else {
+    // Assume user has provided a valid token contract address
+    return tokenStr;
   }
-
-  for (const [address, info] of Object.entries(tokenMap)) {
-    const nameMatch = info.name.toLowerCase() === t;
-    const symbolMatch = info.symbol.toLowerCase() === t;
-    if (nameMatch || symbolMatch) {
-      return address;
-    }
-  }
-  throw new Error(`Token not found: ${tokenStr}`);
 }
 
 /**
@@ -57,6 +51,7 @@ function findTokenAddress(tokenStr) {
  */
 async function getBestQuote(provider, tokenInAddress, tokenOutAddress, amountInWei) {
   const quoter = new ethers.Contract(QUOTER_ADDRESS, quoterAbi, provider);
+  
   for (let fee of feeTiers) {
     try {
       const amountOut = await quoter.callStatic.quoteExactInputSingle(
@@ -73,24 +68,33 @@ async function getBestQuote(provider, tokenInAddress, tokenOutAddress, amountInW
       continue; // Try the next fee tier
     }
   }
-  throw new Error("No valid liquidity pool found.");
+  throw new Error("No valid liquidity pool found for the specified tokens.");
 }
 
 /**
  * Calculates slippage dynamically based on token volatility and user-defined limits.
- * @param {string} tokenIn Input token
- * @param {string} tokenOut Output token
+ * Here, we've increased the base and max slippage for more volatile or illiquid pairs.
+ * @param {string} tokenIn Input token (symbol or address)
+ * @param {string} tokenOut Output token (symbol or address)
  * @returns {number} Slippage tolerance
  */
 function calculateSlippage(tokenIn, tokenOut) {
-  const BASE_SLIPPAGE = 0.005; // 0.5%
-  const MAX_SLIPPAGE = 0.03; // 3%
-  if (tokenIn === 'weth' && tokenOut === 'usdt') {
-    return BASE_SLIPPAGE; // Minimal slippage for stable pairs
-  } else if (tokenIn === 'weth' || tokenOut === 'weth') {
-    return Math.min(BASE_SLIPPAGE * 2, MAX_SLIPPAGE); // Adjust for volatility
+  const BASE_SLIPPAGE = 0.01; // 1%
+  const MAX_SLIPPAGE = 0.1;   // 10%
+
+  const inLower = tokenIn.toLowerCase();
+  const outLower = tokenOut.toLowerCase();
+
+  // Simple example logic:
+  if (inLower === 'eth' && outLower === 'usdt') {
+    // Low volatility / stable pair
+    return BASE_SLIPPAGE; 
+  } else if (inLower === 'eth' || outLower === 'eth') {
+    // Adjust for volatility if ETH is involved
+    return Math.min(BASE_SLIPPAGE * 2, MAX_SLIPPAGE);
   } else {
-    return MAX_SLIPPAGE; // Higher slippage for illiquid pairs
+    // Potentially illiquid or volatile pair
+    return MAX_SLIPPAGE;
   }
 }
 
@@ -103,13 +107,15 @@ function calculateSlippage(tokenIn, tokenOut) {
  * curl -X POST http://localhost:8000/swap \
  *  -H "Content-Type: application/json" \
  *  -H "Authorization: 0xYOUR_PRIVATE_KEY" \
- *  -d '{"amountIn":"1","tokenIn":"eth","tokenOut":"dai"}'
+ *  -d '{"amountIn":"0.0002","tokenIn":"eth","tokenOut":"0x...TOKEN_ADDRESS..."}'
  */
 app.post('/swap', async (req, res) => {
   const { authorization } = req.headers;
   const { amountIn, tokenIn, tokenOut } = req.body;
 
-  if (!authorization) return res.status(401).json({ error: "Private key required in Authorization header" });
+  if (!authorization) {
+    return res.status(401).json({ error: "Private key required in Authorization header" });
+  }
   if (!amountIn || !tokenIn || !tokenOut) {
     return res.status(400).json({ error: "Missing required parameters in request body" });
   }
@@ -122,8 +128,8 @@ app.post('/swap', async (req, res) => {
     const tokenOutAddress = findTokenAddress(tokenOut);
     const amountInWei = ethers.utils.parseEther(amountIn);
 
-    // If tokenIn is "eth", we send ETH as value and no ERC20 checks.
-    let valueToSend = 0;
+    // If tokenIn is "eth", we send ETH as `value`, and skip ERC20 checks.
+    let valueToSend = ethers.BigNumber.from(0);
     if (tokenIn.toLowerCase() === 'eth') {
       valueToSend = amountInWei;
     } else {
@@ -143,7 +149,10 @@ app.post('/swap', async (req, res) => {
       // Check allowance
       const allowance = await tokenContract.allowance(wallet.address, UNISWAP_V3_ROUTER_ADDRESS);
       if (allowance.lt(amountInWei)) {
-        const approveTx = await tokenContract.approve(UNISWAP_V3_ROUTER_ADDRESS, ethers.constants.MaxUint256);
+        const approveTx = await tokenContract.approve(
+          UNISWAP_V3_ROUTER_ADDRESS,
+          ethers.constants.MaxUint256
+        );
         await approveTx.wait();
         console.log("Approval complete.");
       }
@@ -151,8 +160,8 @@ app.post('/swap', async (req, res) => {
 
     // Get the best quote
     const { fee, amountOut } = await getBestQuote(provider, tokenInAddress, tokenOutAddress, amountInWei);
-    const dynamicSlippage = calculateSlippage(tokenIn.toLowerCase(), tokenOut.toLowerCase());
-    const amountOutMinimum = amountOut.mul(100 - (dynamicSlippage * 100)).div(100);
+    const dynamicSlippage = calculateSlippage(tokenIn, tokenOut);
+    const amountOutMinimum = amountOut.mul(100 - dynamicSlippage * 100).div(100);
 
     const router = new ethers.Contract(UNISWAP_V3_ROUTER_ADDRESS, routerAbi, wallet);
 
@@ -161,14 +170,13 @@ app.post('/swap', async (req, res) => {
       tokenOut: tokenOutAddress,
       fee,
       recipient: wallet.address,
-      deadline: Math.floor(Date.now() / 1000) + 300,
+      deadline: Math.floor(Date.now() / 1000) + 300, // 5-minute deadline
       amountIn: amountInWei,
       amountOutMinimum,
       sqrtPriceLimitX96: 0
     };
 
     // Execute the transaction
-    // If tokenIn was ETH, we supply `value: amountInWei`, else `value: 0`.
     const swapTx = await router.exactInputSingle(params, {
       gasLimit: MAX_GAS_LIMIT,
       value: valueToSend
@@ -184,6 +192,10 @@ app.post('/swap', async (req, res) => {
 /**
  * Quote tokens endpoint.
  * Provides the estimated amount of output token for a given input token amount.
+ * Example request:
+ * curl -X POST http://localhost:8000/quote \
+ *  -H "Content-Type: application/json" \
+ *  -d '{"amountIn":"0.0002","tokenIn":"eth","tokenOut":"0x...TOKEN_ADDRESS..."}'
  */
 app.post('/quote', async (req, res) => {
   const { amountIn, tokenIn, tokenOut } = req.body;
@@ -199,8 +211,8 @@ app.post('/quote', async (req, res) => {
     const amountInWei = ethers.utils.parseEther(amountIn);
 
     const { fee, amountOut } = await getBestQuote(provider, tokenInAddress, tokenOutAddress, amountInWei);
-
     const amountOutFormatted = ethers.utils.formatUnits(amountOut, 18);
+
     return res.status(200).json({ feeTier: fee, amountOut: amountOutFormatted });
   } catch (error) {
     console.error(error.message);
